@@ -12,6 +12,7 @@
     "build": "tsc",
     "test": "",
     "test:functional": "jest --projects ./test --runInBand",
+    "test:unit": "jest",
     "style:check": "prettier --check src/**/*.ts test/**/*.ts",
     "style:fix": "prettier --write src/**/*.ts test/**/*.ts",
     "lint": "eslint ./src ./test --ext .ts",
@@ -19,6 +20,7 @@
   },
   "dependencies": {
     "@overnightjs/core": "^1.7.5",
+    "axios": "^0.21.1",
     "express": "^4.17.1",
     "module-alias": "^2.2.2"
   },
