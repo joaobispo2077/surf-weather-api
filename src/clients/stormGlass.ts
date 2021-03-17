@@ -1,3 +1,4 @@
+import { InternalError } from '@src/util/errors/internalError';
 import axios, { AxiosStatic } from 'axios';
 
 export interface StormGlassPointSource {
@@ -28,6 +29,13 @@ export interface ForecastPoint {
   windSpeed: number;
 }
 
+export class ClientRequestError extends InternalError {
+  constructor(message: string) {
+    const internalMessage =
+      'Unexpected error when trying to communicate to StormGlass';
+    super(`${internalMessage}: ${message}`);
+  }
+}
 export class StormGlass {
   readonly stormGlassAPIParams =
     'swellDirection,swellHeight,swellPeriod,waveDirection,waveHeight,windDirection,windSpeed';
@@ -36,15 +44,19 @@ export class StormGlass {
   constructor(protected request: AxiosStatic = axios) {}
 
   public async fetchPoints(lat: number, lng: number): Promise<ForecastPoint[]> {
-    const response = await this.request.get<StormGlassForecastResponse>(
-      `https://api.stormglass.io/v2/weather/point?lat=${lat}&lng=${lng}&params=${this.stormGlassAPIParams}&source=${this.stormGlassAPISource}&end=1592113802&lat=,4%7Blat%7D&lng=,4%7Blng%7D`,
-      {
-        headers: {
-          Authorization: 'fake-token',
-        },
-      }
-    );
-    return this.normalizeResponse(response.data);
+    try {
+      const response = await this.request.get<StormGlassForecastResponse>(
+        `https://api.stormglass.io/v2/weather/point?lat=${lat}&lng=${lng}&params=${this.stormGlassAPIParams}&source=${this.stormGlassAPISource}&end=1592113802&lat=,4%7Blat%7D&lng=,4%7Blng%7D`,
+        {
+          headers: {
+            Authorization: 'fake-token',
+          },
+        }
+      );
+      return this.normalizeResponse(response.data);
+    } catch (err) {
+      throw new ClientRequestError(err.message);
+    }
   }
 
   private normalizeResponse(
