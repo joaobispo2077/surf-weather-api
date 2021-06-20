@@ -19,10 +19,12 @@
   },
   "dependencies": {
     "@overnightjs/core": "^1.7.6",
+    "axios": "^0.21.1",
     "express": "^4.17.1",
     "module-alias": "^2.2.2"
   },
   "devDependencies": {
+    "@types/axios": "^0.14.0",
     "@types/express": "^4.17.12",
     "@types/jest": "^26.0.23",
     "@types/module-alias": "^2.0.0",
