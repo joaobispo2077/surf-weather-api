@@ -1,16 +1,16 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-const { resolve } = require("path");
+const { resolve } = require('path');
 const root = resolve(__dirname);
 
 module.exports = {
   rootDir: root,
-  displayName: "root-tests",
-  testMatch: ["<rootDir>/src/**/*.ts"],
-  testEnvironment: "node",
+  displayName: 'root-tests',
+  testMatch: ['<rootDir>/src/**/*.spec.ts'],
+  testEnvironment: 'node',
   clearMocks: true,
-  preset: "ts-jest",
+  preset: 'ts-jest',
   moduleNameMapper: {
-    "@src/(.*)": "<rootDir>/src/$1",
-    "@test/(.*)": "<rootDir>/test/$1",
+    '@src/(.*)': '<rootDir>/src/$1',
+    '@test/(.*)': '<rootDir>/test/$1',
   },
 };
