@@ -1,4 +1,3 @@
-import { AxiosStatic } from 'axios';
 import { InternalError } from '@src/util/errors/InternalError';
 import config, { IConfig } from 'config';
 import * as HTTPUtil from '@src/util/request';
