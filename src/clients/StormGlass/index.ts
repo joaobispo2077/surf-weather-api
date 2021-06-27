@@ -36,6 +36,13 @@ export class ClientRequestError extends InternalError {
     super(`${internalMessage}: ${message}`);
   }
 }
+export class StormGlassResponseError extends InternalError {
+  constructor(message: string) {
+    const internalMessage =
+      'Unexpected error when trying to comunicate to StormGlass';
+    super(`${internalMessage}: ${message}`);
+  }
+}
 
 export class StormGlass {
   readonly stormGlassAPIParams =
@@ -57,6 +64,14 @@ export class StormGlass {
       return this.normalizeResponse(response.data);
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
+      if (err.response && err.response.status) {
+        throw new StormGlassResponseError(
+          `Error: ${JSON.stringify(err.response.data)} Code: ${
+            err.response.status
+          }`,
+        );
+      }
+
       throw new ClientRequestError(err.message);
     }
   }

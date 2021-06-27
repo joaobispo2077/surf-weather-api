@@ -7,6 +7,7 @@ jest.mock('axios');
 
 describe('StormGlass Client', () => {
   const mockedAxios = axios as jest.Mocked<typeof axios>;
+
   it('should return the normalized forecast from the StormGlass service', async () => {
     const lat = -33.7927554;
     const lng = 151.232545;
@@ -52,6 +53,24 @@ describe('StormGlass Client', () => {
 
     await expect(stormGlass.fetchPoints(lat, lng)).rejects.toThrow(
       'Unexpected error when trying to comunicate to StormGlass: Network Error',
+    );
+  });
+
+  it('should get an StormGlassResponseError when the StormGlass service responds with error', async () => {
+    const lat = -33.7927554;
+    const lng = 151.232545;
+
+    mockedAxios.get.mockRejectedValue({
+      response: {
+        status: 429,
+        data: { errors: ['Rate Limit reached'] },
+      },
+    });
+
+    const stormGlass = new StormGlass(mockedAxios);
+
+    await expect(stormGlass.fetchPoints(lat, lng)).rejects.toThrow(
+      'Unexpected error when trying to comunicate to StormGlass: Error: {"errors":["Rate Limit reached"]} Code: 429',
     );
   });
 });
