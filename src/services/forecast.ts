@@ -1,4 +1,5 @@
 import { ForecastPoint, StormGlass } from '@src/clients/StormGlass';
+import { InternalError } from '@src/util/errors/InternalError';
 
 export enum BeachPosition {
 	S = 'S',
@@ -22,31 +23,49 @@ export interface TimeForecast {
 	forecast: BeachForecast[];
 }
 
+export class ForecastProcessingInternalError extends InternalError {
+	constructor(message: string) {
+		super(`Unexpected error during the forecast processing: ${message}`);
+	}
+}
+
 export class Forecast {
 	constructor(protected stormGlass = new StormGlass()) {}
 
 	// eslint-disable-next-line
-  public async processForecastForBeaches(
+	public async processForecastForBeaches(
 		beaches: Beach[],
 	): Promise<TimeForecast[]> {
-		const pointsWithCorrectSources: BeachForecast[] = [];
+		try {
+			const pointsWithCorrectSources: BeachForecast[] = [];
 
-		for (const beach of beaches) {
-			const points = await this.stormGlass.fetchPoints(beach.lat, beach.lng);
-			const enrichedBeachData = points.map((point) =>
-				Object.assign(point, {
-					lat: beach.lat,
-					lng: beach.lng,
-					name: beach.name,
-					position: beach.position,
-					rating: 1,
-				}),
-			);
+			for (const beach of beaches) {
+				const points = await this.stormGlass.fetchPoints(beach.lat, beach.lng);
+				const enrichedBeachData = this.getEnrichedBeachData(points, beach);
 
-			pointsWithCorrectSources.push(...enrichedBeachData);
+				pointsWithCorrectSources.push(...enrichedBeachData);
+			}
+
+			return this.mapForecastByTime(pointsWithCorrectSources);
+			// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		} catch (err: any) {
+			throw new Error(err.message);
 		}
+	}
 
-		return this.mapForecastByTime(pointsWithCorrectSources);
+	private getEnrichedBeachData(
+		points: ForecastPoint[],
+		beach: Beach,
+	): BeachForecast[] {
+		return points.map((point) =>
+			Object.assign(point, {
+				lat: beach.lat,
+				lng: beach.lng,
+				name: beach.name,
+				position: beach.position,
+				rating: 1,
+			}),
+		);
 	}
 
 	private mapForecastByTime(forecast: BeachForecast[]): TimeForecast[] {
