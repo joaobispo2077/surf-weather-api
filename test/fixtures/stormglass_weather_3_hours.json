@@ -89,9 +89,7 @@
       "windSpeed"
     ],
     "requestCount": 44,
-    "source": [
-      "noaa"
-    ],
+    "source": ["noaa"],
     "start": "2020-04-26 00:00"
   }
 }
