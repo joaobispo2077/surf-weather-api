@@ -22,7 +22,8 @@
     "axios": "^0.21.1",
     "config": "^3.3.6",
     "express": "^4.17.1",
-    "module-alias": "^2.2.2"
+    "module-alias": "^2.2.2",
+    "mongoose": "^5.13.2"
   },
   "devDependencies": {
     "@types/axios": "^0.14.0",
@@ -30,6 +31,7 @@
     "@types/express": "^4.17.12",
     "@types/jest": "^26.0.23",
     "@types/module-alias": "^2.0.0",
+    "@types/mongoose": "^5.11.97",
     "@types/node": "^15.12.3",
     "@types/supertest": "^2.0.11",
     "@typescript-eslint/eslint-plugin": "^4.27.0",
