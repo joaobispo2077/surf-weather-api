@@ -1,10 +1,10 @@
 import express, { Application } from 'express';
 
 import { Server } from '@overnightjs/core';
-import '@src/util/module-alias';
-import { ForecastController } from './controllers/forecast';
+import './util/module-alias';
+import { ForecastController } from '@src/controllers/forecast';
 import * as database from '@src/database';
-import { BeachesController } from './controllers/beaches';
+import { BeachesController } from '@src/controllers/beaches';
 
 export class SetupServer extends Server {
 	constructor(private port = 3000) {
