@@ -45,4 +45,28 @@ describe('Auth middleware', () => {
 			error: 'jwt malformed',
 		});
 	});
+
+	it('should return UNAUTHORIZED if theres no token', () => {
+		const requestFake = {
+			headers: {},
+		};
+
+		const sendMock = jest.fn();
+		const responseFake = {
+			status: jest.fn(() => ({
+				send: sendMock,
+			})),
+		};
+
+		const nextFake = jest.fn();
+
+		// eslint-disable-next-line @typescript-eslint/ban-types
+		authMiddleware(requestFake, responseFake as object, nextFake);
+
+		expect(responseFake.status).toHaveBeenCalledWith(401);
+		expect(sendMock).toHaveBeenCalledWith({
+			code: 401,
+			error: 'jwt must be provided',
+		});
+	});
 });
