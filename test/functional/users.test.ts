@@ -90,5 +90,25 @@ describe('Users functional tests', () => {
 			expect(response.status).toBe(401);
 			expect(response.body).toEqual({ code: 401, error: 'User not found!' });
 		});
+
+		it('should return UNAUTHORIZED if the user is found but password does not match', async () => {
+			const newUser = {
+				name: 'John Doe',
+				email: 'john5@mail.com',
+				password: '1234',
+			};
+
+			await new User(newUser).save();
+
+			const response = await global.testRequest
+				.post('/users/authenticate')
+				.send({ email: newUser.email, password: 'test-unmatch-password' });
+
+			expect(response.status).toBe(401);
+			expect(response.body).toEqual({
+				code: 401,
+				error: 'Password does not match!',
+			});
+		});
 	});
 });
