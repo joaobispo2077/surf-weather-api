@@ -1,4 +1,5 @@
-import mongoose, { Model, Document, Schema } from 'mongoose';
+import mongoose, { Model, Document } from 'mongoose';
+import bcrypt from 'bcrypt';
 
 export enum CUSTOM_VALIDATION {
 	DUPLICATED = 'DUPLICATED',
@@ -43,4 +44,30 @@ schema.path('email').validate(
 	CUSTOM_VALIDATION.DUPLICATED,
 );
 
+export async function hashPassword(
+	password: string,
+	salt = 10,
+): Promise<string> {
+	return await bcrypt.hash(password, salt);
+}
+
+export async function comparePasswords(
+	password: string,
+	hashPassword: string,
+): Promise<boolean> {
+	return await bcrypt.compare(password, hashPassword);
+}
+
+schema.pre<UserModel>('save', async function (): Promise<void> {
+	if (!this.password || !this.isModified('password')) {
+		return;
+	}
+
+	try {
+		const hashedPassword = await hashPassword(this.password);
+		this.password = hashedPassword;
+	} catch (err) {
+		console.error(`Error hashing the password for the user ${this.email}`, err);
+	}
+});
 export const User: Model<UserModel> = mongoose.model('User', schema);
