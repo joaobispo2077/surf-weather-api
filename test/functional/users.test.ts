@@ -58,7 +58,7 @@ describe('Users functional tests', () => {
 	});
 
 	describe('when authenticating a user', () => {
-		it.only('should generate a token for a valid user', async () => {
+		it('should generate a token for a valid user', async () => {
 			const newUser = {
 				name: 'John Doe',
 				email: 'john4@mail.com',
@@ -74,6 +74,21 @@ describe('Users functional tests', () => {
 			expect(response.body).toEqual(
 				expect.objectContaining({ token: expect.any(String) }),
 			);
+		});
+
+		it('should return status UNAUTHORIZED if the user with the given email is not found', async () => {
+			const newUser = {
+				name: 'John Doe',
+				email: 'john4@mail.com',
+				password: '1234',
+			};
+
+			const response = await global.testRequest
+				.post('/users/authenticate')
+				.send({ email: newUser.email, password: newUser.password });
+
+			expect(response.status).toBe(401);
+			expect(response.body).toEqual({ code: 401, error: 'User not found!' });
 		});
 	});
 });
