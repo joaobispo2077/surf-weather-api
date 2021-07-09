@@ -79,7 +79,7 @@ describe('Users functional tests', () => {
 		it('should return status UNAUTHORIZED if the user with the given email is not found', async () => {
 			const newUser = {
 				name: 'John Doe',
-				email: 'john4@mail.com',
+				email: 'john40@mail.com',
 				password: '1234',
 			};
 
