@@ -34,7 +34,6 @@ jobs:
       - name: Install dependencies
         run: yarn --frozen-lockfile
       # this step install dependencies, --frozen-lockfile block yarn to update versions
-
       - name: Run all tests
         run: yarn test
 
@@ -47,13 +46,13 @@ jobs:
         # run: ./scripts/deploy.sh
 
         # Deployment with heroku action
-        - shell: bash
-          if: github.ref == 'refs/heads/master'
-          name: Deployment
-          uses: akhileshns/heroku-deploy@v3.12.12
-          with:
-            heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
-            heroku_app_name: ${{ secrets.HEROKU_APP_NAME }}
-            heroku_email: ${{ secrets.HEROKU_EMAIL }}
+      - shell: bash
+        if: github.ref == 'refs/heads/master'
+        name: Deployment
+        uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+          heroku_app_name: ${{ secrets.HEROKU_APP_NAME }}
+          heroku_email: ${{ secrets.HEROKU_EMAIL }}
         env:
           CI: true
