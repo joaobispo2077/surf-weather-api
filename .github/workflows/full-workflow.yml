@@ -1,3 +1,4 @@
+
 name: Complete workflow
 
 on:
@@ -6,9 +7,12 @@ on:
       - master
 
 jobs:
-	build:
-		runs-on: ubuntu-latest
-		strategy:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
 			matrix:
 				node-version: [14.x]
 				mongodb-version: [4.2]
