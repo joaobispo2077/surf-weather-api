@@ -19,7 +19,7 @@ jobs:
       - run: git fetch --prune --unshallow
       # this step download all codebase with git history
 
-      - name: Use Node.js ${{ matrix.node-version } }
+      - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
