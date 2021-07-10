@@ -28,7 +28,7 @@ jobs:
       - name: Start MongoDB
         uses: supercharge/mongodb-github-action@1.1.0
         with:
-          mongodb-version: ${{ mongodb-version }}
+          mongodb-version: ${{ matrix.mongodb-version }}
       # this step install mondodb to run integration tests
 
       - name: Install dependencies
