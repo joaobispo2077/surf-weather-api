@@ -37,15 +37,6 @@ jobs:
       - name: Run all tests
         run: yarn test
 
-        # - shell: bash
-        #   if: github.ref == 'refs/heads/master'
-        # in umbler with ssh
-        # name: Create SSH deploymeny key
-        # env:
-        #   SSH_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-        # run: ./scripts/deploy.sh
-
-        # Deployment with heroku action
       - shell: bash
         if: github.ref == 'refs/heads/master'
         name: Deployment
@@ -56,3 +47,12 @@ jobs:
           heroku_email: ${{ secrets.HEROKU_EMAIL }}
         env:
           CI: true
+      # - shell: bash
+      #   if: github.ref == 'refs/heads/master'
+      # in umbler with ssh
+      # name: Create SSH deploymeny key
+      # env:
+      #   SSH_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+      # run: ./scripts/deploy.sh
+
+      # Deployment with heroku action
