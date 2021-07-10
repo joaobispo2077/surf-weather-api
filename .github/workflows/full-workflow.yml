@@ -38,26 +38,22 @@ jobs:
       - name: Run all tests
         run: yarn test
 
-      # - shell: bash
-      #   if: github.ref == 'refs/heads/master'
-      # in umbler with ssh
-      # name: Create SSH deploymeny key
-      # env:
-      #   SSH_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-      # run: ./scripts/deploy.sh
-      # heroku with action
-      # - shell: bash
-      #   if: github.ref == 'refs/heads/master'
-      #   name: Deployment
-      #   uses: akhileshns/heroku-deploy@v3.12.12
-      #   with:
-      #     heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
-      #     heroku_app_name: ${{ secrets.HEROKU_APP_NAME }}
-      #     heroku_email: ${{ secrets.HEROKU_EMAIL }}
-      # raw heroku deploy
-      - shell: bash
-        if: github.ref == 'refs/heads/master'
-        name: Deployment
-        run: git remote add heroku https://git.heroku.com/surf-weather-api.git && git push heroku master
+        # - shell: bash
+        #   if: github.ref == 'refs/heads/master'
+        # in umbler with ssh
+        # name: Create SSH deploymeny key
+        # env:
+        #   SSH_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        # run: ./scripts/deploy.sh
+
+        # Deployment with heroku action
+        - shell: bash
+          if: github.ref == 'refs/heads/master'
+          name: Deployment
+          uses: akhileshns/heroku-deploy@v3.12.12
+          with:
+            heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+            heroku_app_name: ${{ secrets.HEROKU_APP_NAME }}
+            heroku_email: ${{ secrets.HEROKU_EMAIL }}
         env:
           CI: true
