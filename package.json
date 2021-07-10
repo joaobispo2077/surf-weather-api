@@ -7,9 +7,9 @@
 	"author": "João Bispo <joaobispo2077@gmail.com>",
 	"license": "ISC",
 	"scripts": {
-		"build": "tsc",
-		"start": "yarn build && node dist/src/index.js",
+		"start": "node dist/src/index.js",
 		"dev": "ts-node-dev src/index.ts",
+		"build": "tsc",
 		"test": "yarn test:unit && yarn test:functional",
 		"test:functional": "jest --projects ./test --runInBand",
 		"test:unit": "jest",
