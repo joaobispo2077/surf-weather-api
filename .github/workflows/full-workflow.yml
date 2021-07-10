@@ -39,10 +39,8 @@ jobs:
         run: yarn test
       # this step run all tests
 
-      - shell: bash
-        if: github.ref == 'refs/heads/master'
-        name: Deployment
-      - uses: akhileshns/heroku-deploy@v3.12.12
+      - name: Deployment
+      uses: akhileshns/heroku-deploy@v3.12.12
         with:
           heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
           heroku_app_name: ${{ secrets.HEROKU_APP_NAME }}
