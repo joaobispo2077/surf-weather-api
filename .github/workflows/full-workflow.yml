@@ -35,6 +35,10 @@ jobs:
         run: yarn --frozen-lockfile
       # this step install dependencies, --frozen-lockfile block yarn to update versions
 
+      - name: Run linters to check code syntax/style
+        run: yarn lint
+      # this step run all tests
+
       - name: Run all tests
         run: yarn test
       # this step run all tests
