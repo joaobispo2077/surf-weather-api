@@ -8,7 +8,8 @@
 	"license": "ISC",
 	"scripts": {
 		"start": "node dist/src/index.js",
-		"dev": "ts-node-dev src/index.ts | pino-pretty -C",
+		"dev": "ts-node-dev --transpile-only src/index.ts | pino-pretty",
+		"dev:win": "cmd.exe /c \"npx ts-node-dev --transpile-only .\\src\\index.ts | pino-pretty -C\"",
 		"build": "tsc",
 		"test": "yarn test:unit && yarn test:functional",
 		"test:functional": "jest --projects ./test --runInBand",
