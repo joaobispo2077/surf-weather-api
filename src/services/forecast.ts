@@ -1,4 +1,5 @@
 import { ForecastPoint, StormGlass } from '@src/clients/StormGlass';
+import logger from '@src/logger';
 import { Beach } from '@src/models/beach';
 import { InternalError } from '@src/util/errors/InternalError';
 
@@ -22,6 +23,7 @@ export class Forecast {
 	public async processForecastForBeaches(
 		beaches: Beach[],
 	): Promise<TimeForecast[]> {
+		logger.info(`Preparing the forecast for ${beaches.length} beaches`);
 		try {
 			const pointsWithCorrectSources: BeachForecast[] = [];
 
@@ -35,7 +37,8 @@ export class Forecast {
 			return this.mapForecastByTime(pointsWithCorrectSources);
 			// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		} catch (err: any) {
-			throw new Error(err.message);
+			logger.error(err);
+			throw new ForecastProcessingInternalError(err.message);
 		}
 	}
 
