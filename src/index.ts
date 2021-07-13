@@ -9,6 +9,19 @@ enum ExitStatus {
 
 const port = process.env.PORT || config.get('App.port') || 3000;
 
+process.on('unhandledRejection', (reason, promise) => {
+	logger.error(
+		`App exiting due to an unhandle promise: ${promise} and reason: ${reason}`,
+	);
+
+	throw reason;
+});
+
+process.on('uncaughtException', (error) => {
+	logger.error(`App exiting due to an uncaught exception: ${error}`);
+	process.exit(ExitStatus.Failure);
+});
+
 (async (): Promise<void> => {
 	try {
 		const server = new SetupServer(port as number);
