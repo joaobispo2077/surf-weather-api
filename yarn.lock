@@ -668,6 +668,18 @@
   resolved "https://registry.yarnpkg.com/@types/cookiejar/-/cookiejar-2.1.2.tgz#66ad9331f63fe8a3d3d9d8c6e3906dd10f6446e8"
   integrity sha512-t73xJJrvdTjXrn4jLS9VSGRbz0nUY3cl2DMGDU48lKl+HR9dbbjW2A9r3g40VA++mQpy6uuHg33gy7du2BKpog==
 
+"@types/cors@^2.8.12":
+  version "2.8.12"
+  resolved "https://registry.yarnpkg.com/@types/cors/-/cors-2.8.12.tgz#6b2c510a7ad7039e98e7b8d3d6598f4359e5c080"
+  integrity sha512-vt+kDhq/M2ayberEtJcIN/hxXy1Pk+59g2FV/ZQceeaTyCtCucjL2Q7FXlFjtWn4n15KCr1NE2lNNFhp0lEThw==
+
+"@types/express-pino-logger@^4.0.2":
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/@types/express-pino-logger/-/express-pino-logger-4.0.2.tgz#0ac505e0e597ecb42a88e21bbe7cd6bfecfd2f42"
+  integrity sha512-pjFbznTQ/h9Dht4YP1Zqfj2+4S8K4u7K+EowklXhf0aL43KUIYo126w2h8mtwoHfa91Z3BYA8w2wfUfwNAHroA==
+  dependencies:
+    "@types/pino-http" "*"
+
 "@types/express-serve-static-core@^4.17.18":
   version "4.17.21"
   resolved "https://registry.yarnpkg.com/@types/express-serve-static-core/-/express-serve-static-core-4.17.21.tgz#a427278e106bca77b83ad85221eae709a3414d42"
@@ -779,6 +791,13 @@
   version "15.12.3"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-15.12.3.tgz#2817bf5f25bc82f56579018c53f7d41b1830b1af"
   integrity sha512-SNt65CPCXvGNDZ3bvk1TQ0Qxoe3y1RKH88+wZ2Uf05dduBCqqFQ76ADP9pbT+Cpvj60SkRppMCh2Zo8tDixqjQ==
+
+"@types/pino-http@*":
+  version "5.4.2"
+  resolved "https://registry.yarnpkg.com/@types/pino-http/-/pino-http-5.4.2.tgz#9575091800733cfbe89429e6cfa6171cb64c0aaa"
+  integrity sha512-bHEWyfaLUcUzk1axkfx/L6Xvi8Ip/dQ3Skpe6FDrdPl1SAsL4+gWcolpGNmmpO1ZsGTqB10EUYl4PXIgGeSKWA==
+  dependencies:
+    "@types/pino" "*"
 
 "@types/pino-pretty@*":
   version "4.7.1"
@@ -1544,6 +1563,14 @@ core-util-is@~1.0.0:
   resolved "https://registry.yarnpkg.com/core-util-is/-/core-util-is-1.0.2.tgz#b5fd54220aa2bc5ab57aab7140c940754503c1a7"
   integrity sha1-tf1UIgqivFq1eqtxQMlAdUUDwac=
 
+cors@^2.8.5:
+  version "2.8.5"
+  resolved "https://registry.yarnpkg.com/cors/-/cors-2.8.5.tgz#eac11da51592dd86b9f06f6e7ac293b3df875d29"
+  integrity sha512-KIHbLJqu73RGr/hnbrO9uBeixNGuvSQjul/jdFvS/KFSIH1hWVd1ng7zOHx+YrEfInLG7q4n6GHQ9cDtxv/P6g==
+  dependencies:
+    object-assign "^4"
+    vary "^1"
+
 create-require@^1.1.0:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/create-require/-/create-require-1.1.1.tgz#c1d7e8f1e5f6cfc9ff65f9cd352d37348756c333"
@@ -1987,6 +2014,13 @@ expect@^27.0.2:
     jest-message-util "^27.0.2"
     jest-regex-util "^27.0.1"
 
+express-pino-logger@^6.0.0:
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/express-pino-logger/-/express-pino-logger-6.0.0.tgz#ed8f71dbbc3c2affbd4104a287f9c2a6a39b435b"
+  integrity sha512-YjBnalqgsNylRnWEpQGf8YzBP54stpoqX/o+SnpGr04OB7dRIQlsC1qvutFOyRjhLhXIWCe43pYJcjp9zM1Ccg==
+  dependencies:
+    pino-http "^5.3.0"
+
 express@^4.16.3, express@^4.17.1:
   version "4.17.1"
   resolved "https://registry.yarnpkg.com/express/-/express-4.17.1.tgz#4491fc38605cf51f8629d39c2b5d026f98a4c134"
@@ -2069,6 +2103,13 @@ fast-safe-stringify@^2.0.8:
   version "2.0.8"
   resolved "https://registry.yarnpkg.com/fast-safe-stringify/-/fast-safe-stringify-2.0.8.tgz#dc2af48c46cf712b683e849b2bbd446b32de936f"
   integrity sha512-lXatBjf3WPjmWD6DpIZxkeSsCOwqI0maYMpgDlx8g4U2qi4lbjA9oH/HD2a87G+KfsUmo5WbJFmqBZlPxtptag==
+
+fast-url-parser@^1.1.3:
+  version "1.1.3"
+  resolved "https://registry.yarnpkg.com/fast-url-parser/-/fast-url-parser-1.1.3.tgz#f4af3ea9f34d8a271cf58ad2b3759f431f0b318d"
+  integrity sha1-9K8+qfNNiicc9YrSs3WfQx8LMY0=
+  dependencies:
+    punycode "^1.3.2"
 
 fastq@^1.6.0:
   version "1.11.0"
@@ -3587,7 +3628,7 @@ nwsapi@^2.2.0:
   resolved "https://registry.yarnpkg.com/nwsapi/-/nwsapi-2.2.0.tgz#204879a9e3d068ff2a55139c2c772780681a38b7"
   integrity sha512-h2AatdwYH+JHiZpv7pt/gSX1XoRGb7L/qSIeuqA6GwYoF9w1vP1cw42TO0aI2pNyshRK5893hNSl+1//vHK7hQ==
 
-object-assign@^4.0.1, object-assign@^4.1.0:
+object-assign@^4, object-assign@^4.0.1, object-assign@^4.1.0:
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/object-assign/-/object-assign-4.1.1.tgz#2109adc7965887cfc05cbbd442cac8bfbb360863"
   integrity sha1-IQmtx5ZYh8/AXLvUQsrIv7s2CGM=
@@ -3763,6 +3804,15 @@ pinkie@^2.0.0:
   resolved "https://registry.yarnpkg.com/pinkie/-/pinkie-2.0.4.tgz#72556b80cfa0d48a974e80e77248e80ed4f7f870"
   integrity sha1-clVrgM+g1IqXToDnckjoDtT3+HA=
 
+pino-http@^5.3.0:
+  version "5.5.0"
+  resolved "https://registry.yarnpkg.com/pino-http/-/pino-http-5.5.0.tgz#b91e02714cc40b13fc3d82222fc1a96f0c99d6ea"
+  integrity sha512-ZXhWeYhUisf9oZdS54XaBTrNVzZ7p61/sw0RpwCdU1vI/qdGWvSG4QUA5qU5Y5ya47ch3kM3HTcZf/QB5SCtNw==
+  dependencies:
+    fast-url-parser "^1.1.3"
+    pino "^6.0.0"
+    pino-std-serializers "^2.4.0"
+
 pino-pretty@^5.1.1:
   version "5.1.1"
   resolved "https://registry.yarnpkg.com/pino-pretty/-/pino-pretty-5.1.1.tgz#387aebbe0c4504b9e3f6f51148e36d1b336cb16d"
@@ -3781,12 +3831,17 @@ pino-pretty@^5.1.1:
     split2 "^3.1.1"
     strip-json-comments "^3.1.1"
 
+pino-std-serializers@^2.4.0:
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/pino-std-serializers/-/pino-std-serializers-2.5.0.tgz#40ead781c65a0ce7ecd9c1c33f409d31fe712315"
+  integrity sha512-wXqbqSrIhE58TdrxxlfLwU9eDhrzppQDvGhBEr1gYbzzM4KKo3Y63gSjiDXRKLVS2UOXdPNR2v+KnQgNrs+xUg==
+
 pino-std-serializers@^3.1.0:
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/pino-std-serializers/-/pino-std-serializers-3.2.0.tgz#b56487c402d882eb96cd67c257868016b61ad671"
   integrity sha512-EqX4pwDPrt3MuOAAUBMU0Tk5kR/YcCM5fNPEzgCO2zJ5HfX0vbiH9HbJglnyeQsN96Kznae6MWD47pZB5avTrg==
 
-pino@^6.12.0:
+pino@^6.0.0, pino@^6.12.0:
   version "6.12.0"
   resolved "https://registry.yarnpkg.com/pino/-/pino-6.12.0.tgz#2281521620d70eeff519039467352d656f46735e"
   integrity sha512-5NGopOcUusGuklGHVVv9az0Hv/Dj3urHhD3G+zhl5pBGIRYAeGCi/Ej6YCl16Q2ko28cmYiJz+/qRoJiwy62Rw==
@@ -3897,6 +3952,11 @@ pump@^3.0.0:
   dependencies:
     end-of-stream "^1.1.0"
     once "^1.3.1"
+
+punycode@^1.3.2:
+  version "1.4.1"
+  resolved "https://registry.yarnpkg.com/punycode/-/punycode-1.4.1.tgz#c0d5a63b2718800ad8e1eb0fa5269c84dd41845e"
+  integrity sha1-wNWmOycYgArY4esPpSachN1BhF4=
 
 punycode@^2.1.0, punycode@^2.1.1:
   version "2.1.1"
@@ -4751,7 +4811,7 @@ validate-npm-package-license@^3.0.1:
     spdx-correct "^3.0.0"
     spdx-expression-parse "^3.0.0"
 
-vary@~1.1.2:
+vary@^1, vary@~1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/vary/-/vary-1.1.2.tgz#2299f02c6ded30d4a5961b0b9f74524a18f634fc"
   integrity sha1-IpnwLG3tMNSllhsLn3RSShj2NPw=
