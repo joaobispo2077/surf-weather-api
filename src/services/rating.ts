@@ -18,6 +18,22 @@ export class Rating {
 		return 3;
 	}
 
+	public getRatingForSwellPeriod(period: number): number {
+		if (period >= 7 && period < 10) {
+			return 2;
+		}
+
+		if (period >= 10 && period < 14) {
+			return 4;
+		}
+
+		if (period >= 14) {
+			return 5;
+		}
+
+		return 1;
+	}
+
 	private isWindOffShore(
 		wavePosition: BeachPosition,
 		windPosition: BeachPosition,
