@@ -56,6 +56,17 @@ describe('Rating service', () => {
 			const rating = defaultRating.getRateForPoint(point);
 			expect(rating).toBe(4);
 		});
+
+		it('should get a rating of 5 classic day!', () => {
+			const point = Object.assign({}, defaultPoint, {
+				swellHeight: 2.5,
+				swellPeriod: 16,
+				windDirection: 250,
+			});
+
+			const rating = defaultRating.getRateForPoint(point);
+			expect(rating).toBe(5);
+		});
 	});
 
 	describe('Get rating based on wind and wave position', () => {
