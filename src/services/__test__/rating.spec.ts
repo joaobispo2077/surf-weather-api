@@ -57,6 +57,17 @@ describe('Rating service', () => {
 			expect(rating).toBe(4);
 		});
 
+		it('should get a rating of 4 a good condition but with crossshore winds', () => {
+			const point = Object.assign({}, defaultPoint, {
+				swellHeight: 2.5,
+				swellPeriod: 16,
+				windDirection: 130,
+			});
+
+			const rating = defaultRating.getRateForPoint(point);
+			expect(rating).toBe(4);
+		});
+
 		it('should get a rating of 5 classic day!', () => {
 			const point = Object.assign({}, defaultPoint, {
 				swellHeight: 2.5,
