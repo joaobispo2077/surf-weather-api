@@ -1,3 +1,4 @@
+import { ForecastPoint } from '@src/clients/StormGlass';
 import { Beach, BeachPosition } from '@src/models/beach';
 
 // meters
@@ -18,6 +19,25 @@ const waveHeights = {
 
 export class Rating {
 	constructor(private beach: Beach) {}
+
+	public getRateForPoint(point: ForecastPoint): number {
+		const swellDirection = this.getPositionFromLocation(point.swellDirection);
+		const windDirection = this.getPositionFromLocation(point.windDirection);
+
+		const windAndWaveRating = this.getRatingBasedOnWindAndWavePosition(
+			windDirection,
+			swellDirection,
+		);
+
+		const swellHeightRating = this.getRatingForSwellSize(point.swellHeight);
+
+		const swellPeriodRating = this.getRatingForSwellPeriod(point.swellPeriod);
+
+		const finalRating =
+			(windAndWaveRating + swellHeightRating + swellPeriodRating) / 3;
+
+		return Math.round(finalRating);
+	}
 
 	public getRatingBasedOnWindAndWavePosition(
 		wavePosition: BeachPosition,
