@@ -30,6 +30,12 @@ describe('Rating service', () => {
 			const rating = defaultRating.getRateForPoint(defaultPoint);
 			expect(rating).toBe(1);
 		});
+
+		it('should get a rating of 1 for an ok point', () => {
+			const point = Object.assign({}, defaultPoint, { swellHeight: 0.4 });
+			const rating = defaultRating.getRateForPoint(point);
+			expect(rating).toBe(1);
+		});
 	});
 
 	describe('Get rating based on wind and wave position', () => {
