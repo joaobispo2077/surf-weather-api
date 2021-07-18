@@ -15,7 +15,21 @@ describe('Rating service', () => {
 	const defaultRating = new Rating(defaultBeach);
 
 	describe('Calculate rating for a give point', () => {
-		// TODO:
+		const defaultPoint = {
+			swellDirection: 110,
+			swellHeight: 0.1,
+			swellPeriod: 5,
+			time: 'test',
+			waveDirection: 110,
+			waveHeight: 0.1,
+			windDirection: 100,
+			windSpeed: 100,
+		};
+
+		it('should get a rating less than 1 for a poor point', () => {
+			const rating = defaultRating.getRateForPoint(defaultPoint);
+			expect(rating).toBe(1);
+		});
 	});
 
 	describe('Get rating based on wind and wave position', () => {
