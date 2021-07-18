@@ -1,6 +1,6 @@
 // wave size, sweeper interval, wave height, wave period.
 
-import { Beach, BeachPosition } from '@src/models/beach';
+import { Beach, GeoPosition } from '@src/models/beach';
 import { Rating } from '../rating';
 
 describe('Rating service', () => {
@@ -8,7 +8,7 @@ describe('Rating service', () => {
 		lat: -33.792726,
 		lng: 151.268066,
 		name: 'Manly',
-		position: BeachPosition.E,
+		position: GeoPosition.E,
 		user: 'some-user',
 	};
 
@@ -83,8 +83,8 @@ describe('Rating service', () => {
 	describe('Get rating based on wind and wave position', () => {
 		it('should get rating 1 for a beach with onshore winds', () => {
 			const rating = defaultRating.getRatingBasedOnWindAndWavePosition(
-				BeachPosition.E,
-				BeachPosition.E,
+				GeoPosition.E,
+				GeoPosition.E,
 			);
 
 			expect(rating).toBe(1);
@@ -92,8 +92,8 @@ describe('Rating service', () => {
 
 		it('should get rating 3 for a beach with cross winds', () => {
 			const rating = defaultRating.getRatingBasedOnWindAndWavePosition(
-				BeachPosition.E,
-				BeachPosition.S,
+				GeoPosition.E,
+				GeoPosition.S,
 			);
 
 			expect(rating).toBe(3);
@@ -101,8 +101,8 @@ describe('Rating service', () => {
 
 		it('should get rating 5 for a beach with offshore', () => {
 			const rating = defaultRating.getRatingBasedOnWindAndWavePosition(
-				BeachPosition.E,
-				BeachPosition.W,
+				GeoPosition.E,
+				GeoPosition.W,
 			);
 
 			expect(rating).toBe(5);
@@ -168,27 +168,27 @@ describe('Rating service', () => {
 	describe('Get point based on points location', () => {
 		it('should get the point based on a east location', () => {
 			const position = defaultRating.getPositionFromLocation(92);
-			expect(position).toBe(BeachPosition.E);
+			expect(position).toBe(GeoPosition.E);
 		});
 
 		it('should get the point based on a north location', () => {
 			const position = defaultRating.getPositionFromLocation(360);
-			expect(position).toBe(BeachPosition.N);
+			expect(position).toBe(GeoPosition.N);
 		});
 
 		it('should get the point based on a north location 2', () => {
 			const position = defaultRating.getPositionFromLocation(40);
-			expect(position).toBe(BeachPosition.N);
+			expect(position).toBe(GeoPosition.N);
 		});
 
 		it('should get the point based on a south location', () => {
 			const position = defaultRating.getPositionFromLocation(200);
-			expect(position).toBe(BeachPosition.S);
+			expect(position).toBe(GeoPosition.S);
 		});
 
 		it('should get the point based on a west location', () => {
 			const position = defaultRating.getPositionFromLocation(300);
-			expect(position).toBe(BeachPosition.W);
+			expect(position).toBe(GeoPosition.W);
 		});
 	});
 });
