@@ -36,6 +36,15 @@ describe('Rating service', () => {
 			const rating = defaultRating.getRateForPoint(point);
 			expect(rating).toBe(1);
 		});
+
+		it('should get a rating of 3 for a point with offshore winds and a half overhead height', () => {
+			const point = Object.assign({}, defaultPoint, {
+				swellHeight: 0.7,
+				windDirection: 250,
+			});
+			const rating = defaultRating.getRateForPoint(point);
+			expect(rating).toBe(3);
+		});
 	});
 
 	describe('Get rating based on wind and wave position', () => {
