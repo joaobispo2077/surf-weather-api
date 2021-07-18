@@ -45,6 +45,17 @@ describe('Rating service', () => {
 			const rating = defaultRating.getRateForPoint(point);
 			expect(rating).toBe(3);
 		});
+
+		it('should get a rating of 4 for a point with offshore winds, half overhead high swell and good interval', () => {
+			const point = Object.assign({}, defaultPoint, {
+				swellHeight: 0.7,
+				swellPeriod: 12,
+				windDirection: 250,
+			});
+
+			const rating = defaultRating.getRateForPoint(point);
+			expect(rating).toBe(4);
+		});
 	});
 
 	describe('Get rating based on wind and wave position', () => {
