@@ -25,8 +25,8 @@ export class Rating {
 		const windDirection = this.getPositionFromLocation(point.windDirection);
 
 		const windAndWaveRating = this.getRatingBasedOnWindAndWavePosition(
-			windDirection,
 			swellDirection,
+			windDirection,
 		);
 
 		const swellHeightRating = this.getRatingForSwellSize(point.swellHeight);
