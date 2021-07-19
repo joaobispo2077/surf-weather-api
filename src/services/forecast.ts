@@ -1,10 +1,14 @@
+import _ from 'lodash';
+
 import { ForecastPoint, StormGlass } from '@src/clients/StormGlass';
 import logger from '@src/logger';
 import { Beach } from '@src/models/beach';
 import { InternalError } from '@src/util/errors/InternalError';
 import { Rating } from './rating';
 
-export interface BeachForecast extends Omit<Beach, 'user'>, ForecastPoint {}
+export interface BeachForecast extends Omit<Beach, 'user'>, ForecastPoint {
+	rating: number;
+}
 
 export interface TimeForecast {
 	time: string;
@@ -44,7 +48,12 @@ export class Forecast {
 				pointsWithCorrectSources.push(...enrichedBeachData);
 			}
 
-			return this.mapForecastByTime(pointsWithCorrectSources);
+			const timesForecast = this.mapForecastByTime(pointsWithCorrectSources);
+
+			return timesForecast.map((timeForecast) => ({
+				time: timeForecast.time,
+				forecast: _.orderBy(timeForecast.forecast, ['rating'], ['desc']),
+			}));
 			// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		} catch (err: any) {
 			logger.error(err);
