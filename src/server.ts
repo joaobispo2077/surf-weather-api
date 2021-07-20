@@ -5,11 +5,16 @@ import './util/module-alias';
 
 import expressPino from 'express-pino-logger';
 import cors from 'cors';
+import swaggerUI from 'swagger-ui-express';
+import * as OpenApiValidator from 'express-openapi-validator';
+
+import apiSchema from './api.schema.json';
 import { ForecastController } from '@src/controllers/forecast';
 import * as database from '@src/database';
 import { BeachesController } from '@src/controllers/beaches';
 import { UsersController } from './controllers/users';
 import logger from './logger';
+import { OpenAPIV3 } from 'express-openapi-validator/dist/framework/types';
 
 export class SetupServer extends Server {
 	constructor(private port = 3000) {
@@ -18,12 +23,24 @@ export class SetupServer extends Server {
 
 	public async init(): Promise<void> {
 		this.setupExpress();
+		await this.setupDocumentation();
+
 		this.setupControllers();
 		await this.setupDatabase();
 	}
 
 	public getApp(): Application {
 		return this.app;
+	}
+
+	public async start(): Promise<void> {
+		this.app.listen(this.port, () =>
+			logger.info(`Server is listening of port: ${this.port}`),
+		);
+	}
+
+	public async close(): Promise<void> {
+		await database.close();
 	}
 
 	private setupExpress(): void {
@@ -45,17 +62,18 @@ export class SetupServer extends Server {
 		]);
 	}
 
-	private async setupDatabase(): Promise<void> {
-		await database.connect();
-	}
-
-	public async start(): Promise<void> {
-		this.app.listen(this.port, () =>
-			logger.info(`Server is listening of port: ${this.port}`),
+	private async setupDocumentation(): Promise<void> {
+		this.app.use('/docs', swaggerUI.serve, swaggerUI.setup(apiSchema));
+		this.app.use(
+			OpenApiValidator.middleware({
+				apiSpec: apiSchema as OpenAPIV3.Document,
+				validateRequests: true,
+				validateResponses: true,
+			}),
 		);
 	}
 
-	public async close(): Promise<void> {
-		await database.close();
+	private async setupDatabase(): Promise<void> {
+		await database.connect();
 	}
 }
